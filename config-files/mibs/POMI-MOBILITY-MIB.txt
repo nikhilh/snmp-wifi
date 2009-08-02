@@ -1,0 +1,127 @@
+POMI-MOBILITY-MIB DEFINITIONS ::= BEGIN
+
+--
+-- Example MIB objects for agent module example implementations
+--
+
+IMPORTS
+    MODULE-IDENTITY, OBJECT-TYPE, Integer32,
+    NOTIFICATION-TYPE                       FROM SNMPv2-SMI
+    SnmpAdminString                         FROM SNMP-FRAMEWORK-MIB
+    experimental                            FROM SNMPv2-SMI
+    RowStatus, StorageType                  FROM SNMPv2-TC
+    InetAddressType, InetAddress            FROM INET-ADDRESS-MIB
+;
+
+--
+-- top level structure
+--
+
+pomi        OBJECT IDENTIFIER ::= { experimental 108 }
+wifi        OBJECT IDENTIFIER ::= { pomi 0 }
+
+-- scalars
+--
+
+channel OBJECT-TYPE
+    SYNTAX      SnmpAdminString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+	"The current wifi IF channel."
+
+    DEFVAL { "So long, and thanks for all the fish!" }
+	::= { wifi 0 }
+
+bitrate OBJECT-TYPE
+    SYNTAX      SnmpAdminString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+	"The current wifi IF bitrate."
+
+    DEFVAL { "So long, and thanks for all the fish!" }
+	::= { wifi 1 }
+
+txpower OBJECT-TYPE
+    SYNTAX      SnmpAdminString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+	"The current wifi IF transmission power."
+
+    DEFVAL { "So long, and thanks for all the fish!" }
+	::= { wifi 2 }
+
+ap OBJECT-TYPE
+    SYNTAX      SnmpAdminString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+	"The current wifi IF access point."
+
+    DEFVAL { "So long, and thanks for all the fish!" }
+	::= { wifi 3 }
+
+essid OBJECT-TYPE
+    SYNTAX      SnmpAdminString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+	"The current wifi IF essid."
+
+    DEFVAL { "So long, and thanks for all the fish!" }
+	::= { wifi 4 }
+
+dpid OBJECT-TYPE
+    SYNTAX      SnmpAdminString
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+	"The AP datapath id."
+
+    DEFVAL { "So long, and thanks for all the fish!" }
+	::= { wifi 5 }
+
+wifiPort OBJECT-TYPE
+    SYNTAX      SnmpAdminString
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+	"The OpenFlow port number of the wifi IF."
+
+    DEFVAL { "So long, and thanks for all the fish!" }
+	::= { wifi 6 }
+
+wifiMac OBJECT-TYPE
+    SYNTAX      SnmpAdminString
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+	"The mac address of the wifi IF."
+
+    DEFVAL { "So long, and thanks for all the fish!" }
+	::= { wifi 7 }
+
+hostJoinLeave OBJECT-TYPE
+    SYNTAX      SnmpAdminString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Object for host join-leave event."
+	
+    DEFVAL { "So long, and thanks for all the fish!" }
+	::= { wifi 8 }
+
+wifiNotif NOTIFICATION-TYPE
+    OBJECTS { hostJoinLeave }
+    STATUS current
+    DESCRIPTION "Notification for host join-leave event."
+    ::= { wifi 9 }
+
+keepAliveNotif NOTIFICATION-TYPE
+    OBJECTS { dpid }
+    STATUS current
+    DESCRIPTION "Keep-alive notification informing dpid-ip pair."
+    ::= { wifi 10 }
+
+END
