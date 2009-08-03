@@ -4,6 +4,9 @@ FILES=snmp_executor traphandler keepalivehandler
 
 all: $(FILES)
 
+clean:
+	rm $(FILES) *~
+
 snmp_executor: snmp_executor.cc
 	g++ -I../coreapps -lnetsnmp -o snmp_executor snmp_executor.cc
 
