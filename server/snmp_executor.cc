@@ -45,8 +45,8 @@ const char *our_v3_passphrase = "The Net-SNMP Demo Password";
 #endif
 
 //nox-messenger headers
-#include "snmp/snmp-message.hh"
-#include "messenger/message.hh"
+#include "../../noxcore/src/nox/coreapps/snmp/snmp-message.hh"
+#include "../../noxcore/src/nox/coreapps/messenger/message.hh"
 
 #define NOX_IP "127.0.0.1"
 #define NOX_PORT 2603
