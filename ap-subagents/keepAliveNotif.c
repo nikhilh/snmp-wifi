@@ -23,8 +23,6 @@
 #include "openflow/openflow.h"
 #include "xtoxll.h"
 
-#define SNMP_TRAP_HOST "openflow2.stanford.edu"
-
 void
 send_keepAliveNotif_trap(unsigned int clientreg, void *clientarg)
 {
@@ -48,7 +46,6 @@ send_keepAliveNotif_trap(unsigned int clientreg, void *clientarg)
 
         osf = (struct ofp_switch_features*) reply->data;
         sprintf(dpid_str, "%"PRIx64"", ntohll(osf->datapath_id));
-
 
         netsnmp_variable_list  *var_list = NULL;
         oid snmptrap_oid[] = {1, 3, 6, 1, 6, 3, 1, 1, 4, 1, 0};
