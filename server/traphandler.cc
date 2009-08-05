@@ -40,7 +40,7 @@
 
 #define NOX_IP "127.0.0.1"
 #define NOX_PORT 2603
-#define CONTROLLERS_CONF "/home/flowvisor/CleanSlateLab/Feb22.2009/noxcore/src/nox/snmp-wifi/controllers.conf"
+#define CONTROLLERS_CONF "/etc/snmp/controllers.conf"
 
 using namespace std;
 
