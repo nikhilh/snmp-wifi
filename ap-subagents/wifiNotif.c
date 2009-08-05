@@ -494,7 +494,7 @@ print_event_token(struct iw_event *	event,		/* Extracted token */
               perror("signal(SIGCHLD, SIG_IGN)");
       pid = fork();
       if(pid == 0) {
-          execl("/usr/local/bin/snmptrap", "/usr/local/bin/snmptrap", "-v2c", "-c", "public", SNMP_TRAP_HOST, "\"\"", "POMI-MOBILITY-MIB::wifiNotif", "POMI-MOBILITY-MIB::hostJoinLeave.0", "s", snmp_notif_str, "POMI-MOBILITY-MIB::dpid.0", "s", dpid_str, "POMI-MOBILITY-MIB::wifiPort.0", "s", wifiPort_str, (char*)0);
+          execl(SNMP_TRAP_BIN, SNMP_TRAP_BIN, "-v2c", "-c", "public", SNMP_TRAP_HOST, "\"\"", "POMI-MOBILITY-MIB::wifiNotif", "POMI-MOBILITY-MIB::hostJoinLeave.0", "s", snmp_notif_str, "POMI-MOBILITY-MIB::dpid.0", "s", dpid_str, "POMI-MOBILITY-MIB::wifiPort.0", "s", wifiPort_str, (char*)0);
           exit(0);
       }
       printf("Sent host join trap\n");
