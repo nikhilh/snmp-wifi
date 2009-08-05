@@ -75,7 +75,7 @@ send_keepAliveNotif_trap(unsigned int clientreg, void *clientarg)
         //send_v2trap( var_list );
         if(signal(SIGCHLD, SIG_IGN))
                 perror("signal(SIGCHLD, SIG_IGN)");
-	if(fork()) {
+	if(fork() == 0) {
                 execl(SNMP_TRAP_BIN, SNMP_TRAP_BIN, "-v2c", "-c", "public", SNMP_TRAP_HOST, "\"\"", "POMI-MOBILITY-MIB::keepAliveNotif", "POMI-MOBILITY-MIB::dpid.0", "s", dpid_str, NULL);
                 exit(0);
         }
