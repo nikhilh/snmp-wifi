@@ -8,12 +8,11 @@ all: $(FILES)
 clean:
 	rm $(FILES) *~
 
-keepalive_subagent: keepAliveNotif.c iwlib.c 
+keepalive_subagent: keepAliveNotif.c iwlib.c snmpsys.h
 	$(CC) $@ --cflags "$(CFLAGS)" $^ ../../openflow/lib/libopenflow.a
 
-trap_subagent: wifiNotif.c iwlib.c 
+trap_subagent: wifiNotif.c iwlib.c snmpsys.h
 	$(CC) $@ --cflags "$(CFLAGS)" $^ ../../openflow/lib/libopenflow.a
-
 
 wifi_subagent: bitrate.c channel.c dpid.c essid.c txpower.c wifiMac.c wifiPort.c iwlib.c
 	$(CC) $@ --cflags "$(CFLAGS)" $^ ../../openflow/lib/libopenflow.a
