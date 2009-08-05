@@ -7,6 +7,7 @@
 #include <net-snmp/net-snmp-includes.h>
 #include <net-snmp/agent/net-snmp-agent-includes.h>
 #include "wifiNotif.h"
+#include "snmpsys.h"
 #include "util.h"
 
 /**************************** OF INCLUDES **************************/
@@ -40,7 +41,6 @@
 #define IFLA_WIRELESS	(IFLA_MASTER + 1)
 #endif /* IFLA_WIRELESS */
 
-#define SNMP_TRAP_HOST "openflow2.stanford.edu"
 
 /****************************** TYPES ******************************/
 

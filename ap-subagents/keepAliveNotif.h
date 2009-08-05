@@ -5,7 +5,6 @@
 #ifndef KEEPALIVENOTIF_H
 #define KEEPALIVENOTIF_H
 
-#define SNMP_TRAP_HOST "openroads.controller"
 #define KEEPALIVE_INTERVAL 30
 
 /* function declarations */

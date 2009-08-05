@@ -7,6 +7,7 @@
 #include <net-snmp/net-snmp-includes.h>
 #include <net-snmp/agent/net-snmp-agent-includes.h>
 #include "keepAliveNotif.h"
+#include "snmpsys.h"
 #include "util.h"
 
 /**************************** OF INCLUDES **************************/
@@ -74,9 +75,8 @@ send_keepAliveNotif_trap(unsigned int clientreg, void *clientarg)
         //send_v2trap( var_list );
         if(signal(SIGCHLD, SIG_IGN))
                 perror("signal(SIGCHLD, SIG_IGN)");
-        pid = fork();
-        if(pid == 0) {
-                execl("/usr/local/bin/snmptrap", "/usr/local/bin/snmptrap", "-v2c", "-c", "public", SNMP_TRAP_HOST, "\"\"", "POMI-MOBILITY-MIB::keepAliveNotif", "POMI-MOBILITY-MIB::dpid.0", "s", dpid_str, (char*)0);
+	if(fork()) {
+                execl(SNMP_TRAP_BIN, SNMP_TRAP_BIN, "-v2c", "-c", "public", SNMP_TRAP_HOST, "\"\"", "POMI-MOBILITY-MIB::keepAliveNotif", "POMI-MOBILITY-MIB::dpid.0", "s", dpid_str, NULL);
                 exit(0);
         }
         printf("Sent keep-alive trap\n");
