@@ -8,5 +8,5 @@
 
 #define SNMP_TRAP_HOST "openroads.controller"
 #define SNMP_TRAP_BIN "/usr/bin/snmptrap"
-
+#define SNMP_SEND_TIMES 4
 #endif

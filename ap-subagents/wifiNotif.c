@@ -316,7 +316,6 @@ print_event_token(struct iw_event *	event,		/* Extracted token */
   char *	prefix = (IW_IS_GET(event->cmd) ? "New" : "Set");
 
   /* Send snmp trap if necessary */
-
     char snmp_notif_str[128], dpid_str[128], wifiPort_str[128];
     netsnmp_variable_list  *var_list = NULL;
     oid snmptrap_oid[] = {1, 3, 6, 1, 6, 3, 1, 1, 4, 1, 0};
@@ -494,8 +493,9 @@ print_event_token(struct iw_event *	event,		/* Extracted token */
               perror("signal(SIGCHLD, SIG_IGN)");
       pid = fork();
       if(pid == 0) {
+	for (int i = 0; i < SNMP_SEND_TIMES; i++)
           execl(SNMP_TRAP_BIN, SNMP_TRAP_BIN, "-v2c", "-c", "public", SNMP_TRAP_HOST, "\"\"", "POMI-MOBILITY-MIB::wifiNotif", "POMI-MOBILITY-MIB::hostJoinLeave.0", "s", snmp_notif_str, "POMI-MOBILITY-MIB::dpid.0", "s", dpid_str, "POMI-MOBILITY-MIB::wifiPort.0", "s", wifiPort_str, (char*)0);
-          exit(0);
+	exit(0);
       }
       printf("Sent host join trap\n");
       break;
@@ -517,8 +517,9 @@ print_event_token(struct iw_event *	event,		/* Extracted token */
               perror("signal(SIGCHLD, SIG_IGN)");
       pid = fork();
       if(pid == 0) {
-          execl("/usr/local/bin/snmptrap", "/usr/local/bin/snmptrap", "-v2c", "-c", "public", SNMP_TRAP_HOST, "\"\"", "POMI-MOBILITY-MIB::wifiNotif", "POMI-MOBILITY-MIB::hostJoinLeave.0", "s", snmp_notif_str, "POMI-MOBILITY-MIB::dpid.0", "s", dpid_str, "POMI-MOBILITY-MIB::wifiPort.0", "s", wifiPort_str, (char*)0);
-          exit(0);
+	for (int i = 0; i < SNMP_SEND_TIMES; i++)
+          execl(SNMP_TRAP_BIN, SNMP_TRAP_BIN, "-v2c", "-c", "public", SNMP_TRAP_HOST, "\"\"", "POMI-MOBILITY-MIB::wifiNotif", "POMI-MOBILITY-MIB::hostJoinLeave.0", "s", snmp_notif_str, "POMI-MOBILITY-MIB::dpid.0", "s", dpid_str, "POMI-MOBILITY-MIB::wifiPort.0", "s", wifiPort_str, (char*)0);
+	exit(0);
       }
       printf("Sent host leave trap\n");
       break;
