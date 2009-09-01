@@ -341,7 +341,7 @@ print_event_token(struct iw_event *	event,		/* Extracted token */
   struct ofp_switch_features *osf;
   struct ofp_phy_port *opp;
   uint16_t size;
-  int i;
+  int i, j;
   int pid;
 
   time_init();
@@ -493,8 +493,9 @@ print_event_token(struct iw_event *	event,		/* Extracted token */
               perror("signal(SIGCHLD, SIG_IGN)");
       pid = fork();
       if(pid == 0) {
-	for (int i = 0; i < SNMP_SEND_TIMES; i++)
+	for (j = 0; j < SNMP_SEND_TIMES; j++) {
           execl(SNMP_TRAP_BIN, SNMP_TRAP_BIN, "-v2c", "-c", "public", SNMP_TRAP_HOST, "\"\"", "POMI-MOBILITY-MIB::wifiNotif", "POMI-MOBILITY-MIB::hostJoinLeave.0", "s", snmp_notif_str, "POMI-MOBILITY-MIB::dpid.0", "s", dpid_str, "POMI-MOBILITY-MIB::wifiPort.0", "s", wifiPort_str, (char*)0);
+	}
 	exit(0);
       }
       printf("Sent host join trap\n");
@@ -517,7 +518,7 @@ print_event_token(struct iw_event *	event,		/* Extracted token */
               perror("signal(SIGCHLD, SIG_IGN)");
       pid = fork();
       if(pid == 0) {
-	for (int i = 0; i < SNMP_SEND_TIMES; i++)
+	for (j = 0; j < SNMP_SEND_TIMES; j++)
           execl(SNMP_TRAP_BIN, SNMP_TRAP_BIN, "-v2c", "-c", "public", SNMP_TRAP_HOST, "\"\"", "POMI-MOBILITY-MIB::wifiNotif", "POMI-MOBILITY-MIB::hostJoinLeave.0", "s", snmp_notif_str, "POMI-MOBILITY-MIB::dpid.0", "s", dpid_str, "POMI-MOBILITY-MIB::wifiPort.0", "s", wifiPort_str, (char*)0);
 	exit(0);
       }
